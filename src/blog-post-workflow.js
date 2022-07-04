@@ -1,4 +1,5 @@
 const process = require('process');
+require('https').globalAgent.options.ca = require('ssl-root-cas/latest').create();
 let Parser = require('rss-parser');
 const core = require('@actions/core');
 const fs = require('fs');
