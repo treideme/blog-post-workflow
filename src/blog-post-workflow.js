@@ -104,6 +104,10 @@ let parser = new Parser({
   },
   customFields: {
     item: [...customTagArgs]
+  },
+  // TR: Seems to have issues with chain of trust on IONOS hosted stuff
+  requestOptions: {
+    rejectUnauthorized: false
   }
 });
 
