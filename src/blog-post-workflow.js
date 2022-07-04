@@ -1,6 +1,4 @@
 const process = require('process');
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
-require('https').globalAgent.options.ca = require('ssl-root-cas/latest').create();
 let Parser = require('rss-parser');
 const core = require('@actions/core');
 const fs = require('fs');
@@ -122,6 +120,8 @@ feedList.forEach((siteUrl) => {
       if (tryNumber > 1) {
         core.info(`Previous try for ${siteUrl} failed, retrying: ${tryNumber - 1}`);
       }
+      process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
+      require('https').globalAgent.options.ca = require('ssl-root-cas/latest').create();
       return parser.parseURL(siteUrl)
         .catch(retry);
     }, retryConfig)
